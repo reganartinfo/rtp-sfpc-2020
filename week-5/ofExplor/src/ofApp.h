@@ -5,6 +5,8 @@
 class ofApp : public ofBaseApp{
 
 	public:
+        void callSHOW(int x, int y, int w, int h);
+    
 		void setup();
 		void update();
 		void draw();

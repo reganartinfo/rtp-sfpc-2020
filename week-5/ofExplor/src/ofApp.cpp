@@ -55,7 +55,7 @@ int NE(int min, int max){
 
 // "CALL SHOW (x,y,w,h) will cause a printout showing the contents of the specified rectangle. The specified area will be truncated if it exceeds the area actually represented in the machine or if it is too wide for the device used for output. Digits 0, 1, 2, 3 appear as a grey scale: , ', ~, and K, respectively. "
 
-void callSHOW(int x, int y, int w, int h){
+void ofApp::callSHOW(int x, int y, int w, int h){
     int left = x - (w / 2);
     int right = x + (w / 2);
     int bottom = y - (h / 2);
@@ -68,25 +68,29 @@ void callSHOW(int x, int y, int w, int h){
     if (h % 2 == 1) {
         bottom = bottom - 1;
     }
-    
-    int val = NUM(x, y);
-    string sr = "";
-    
-    switch(val) {
-        case 0 :
-            sr = " ";
-            break;
-        case 1:
-            sr = ".";
-            break;
-        case 2:
-            sr = "!";
-            break;
-        case 3:
-            sr = "$";
-            break;
+
+    for (int i = left; i < right; i++){
+        for (int j = bottom; j < top; j++){
+            int val = NUM(x, y);
+            string sr = "";
+            
+            switch(val) {
+                case 0 :
+                    sr = " ";
+                    break;
+                case 1:
+                    sr = ".";
+                    break;
+                case 2:
+                    sr = "!";
+                    break;
+                case 3:
+                    sr = "$";
+                    break;
+            }
+            font.drawString(sr, i, j);
+        }
     }
-    return sr;
 }
 
 // "CALL PUT (x,y,n) will put at coordinates (x,y) the number n (i.e., overwrite the previous contents). If n is larger than 3, the cell remains unchanged."
@@ -161,11 +165,11 @@ void ofApp::update(){
 void ofApp::draw(){
     ofRectMode(OF_RECTMODE_CENTER);
     
-    for (int x = 0; x < 140; x++){
-        for (int y = 0; y < 140; y++){
-            float fx = ofMap(x, 0, 140, 0, ofGetWidth());
-            float fy = ofMap(y, 0, 140, 0, ofGetHeight());
-            font.drawString(callSHOW(x, y, x, y), fx, fy);
+//    for (int x = 0; x < 140; x++){
+//        for (int y = 0; y < 140; y++){
+//            float fx = ofMap(x, 0, 140, 0, ofGetWidth());
+//            float fy = ofMap(y, 0, 140, 0, ofGetHeight());
+//            callSHOW(x, y, fx, fy);
         }
     }
 }
